@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exemples de Cartes UI/UX</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 60px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 60px;
+      font-size: 1.1rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    /* GLASSMORPHISM */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 30px;
+      color: white;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+
+    .glass-card:hover {
+      box-shadow: 0 15px 50px 0 rgba(31, 38, 135, 0.5);
+    }
+
+    /* NEUMORPHISM */
+    .neuro-card {
+      background: #e0e5ec;
+      border-radius: 20px;
+      padding: 30px;
+      color: #333;
+      box-shadow: 20px 20px 40px #bebebe, -20px -20px 40px #ffffff;
+    }
+
+    .neuro-card:hover {
+      box-shadow: 25px 25px 50px #bebebe, -25px -25px 50px #ffffff;
+    }
+
+    /* GRADIENT */
+    .gradient-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 20px;
+      padding: 30px;
+      color: white;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .gradient-card:hover {
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    /* FLAT */
+    .flat-card {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      color: #333;
+    }
+
+    .flat-card:hover {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    /* OUTLINED */
+    .outlined-card {
+      background: transparent;
+      border: 2px solid white;
+      border-radius: 16px;
+      padding: 30px;
+      color: white;
+    }
+
+    .outlined-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ELEVATED */
+    .elevated-card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      color: #333;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .elevated-card:hover {
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+    }
+
+    /* CARD CONTENT STYLES */
+    .card-image {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+
+    .neuro-card .card-image,
+    .flat-card .card-image,
+    .elevated-card .card-image {
+      opacity: 0.8;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      opacity: 0.85;
+      margin-bottom: 20px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+    }
+
+    .price {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .glass-card .price,
+    .gradient-card .price,
+    .outlined-card .price {
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .neuro-card .price,
+    .flat-card .price,
+    .elevated-card .price {
+      color: #667eea;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .glass-card .btn,
+    .outlined-card .btn {
+      background: white;
+      color: #667eea;
+    }
+
+    .gradient-card .btn {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .neuro-card .btn,
+    .flat-card .btn,
+    .elevated-card .btn {
+      background: #667eea;
+      color: white;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .glass-card .badge,
+    .gradient-card .badge,
+    .outlined-card .badge {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .neuro-card .badge,
+    .flat-card .badge,
+    .elevated-card .badge {
+      background: rgba(102, 126, 234, 0.1);
+      color: #667eea;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 60px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎨 Galerie de Cartes UI/UX</h1>
+  <p class="subtitle">6 styles modernes pour vos interfaces</p>
+
+  <div class="gallery">
+    <!-- GLASSMORPHISM -->
+    <div class="card glass-card">
+      <span class="badge">POPULAR</span>
+      <div class="card-image">🛍️</div>
+      <h3>Glassmorphism</h3>
+      <p>Effet de verre givré moderne avec transparence et flou d'arrière-plan.</p>
+      <div class="card-footer">
+        <span class="price">49€</span>
+        <button class="btn">Acheter</button>
+      </div>
+    </div>
+
+    <!-- NEUMORPHISM -->
+    <div class="card neuro-card">
+      <span class="badge">TRENDING</span>
+      <div class="card-image">🎯</div>
+      <h3>Neumorphism</h3>
+      <p>Design doux et tridimensionnel avec ombres subtiles et relief élégant.</p>
+      <div class="card-footer">
+        <span class="price">59€</span>
+        <button class="btn">Acheter</button>
+      </div>
+    </div>
+
+    <!-- GRADIENT -->
+    <div class="card gradient-card">
+      <span class="badge">HOT</span>
+      <div class="card-image">✨</div>
+      <h3>Gradient Card</h3>
+      <p>Dégradés vibrants et colorés pour un look audacieux et moderne.</p>
+      <div class="card-footer">
+        <span class="price">39€</span>
+        <button class="btn">Acheter</button>
+      </div>
+    </div>
+
+    <!-- FLAT -->
+    <div class="card flat-card">
+      <span class="badge">MINIMAL</span>
+      <div class="card-image">📱</div>
+      <h3>Flat Design</h3>
+      <p>Design épuré et minimaliste, parfait pour une interface claire et simple.</p>
+      <div class="card-footer">
+        <span class="price">29€</span>
+        <button class="btn">Acheter</button>
+      </div>
+    </div>
+
+    <!-- OUTLINED -->
+    <div class="card outlined-card">
+      <span class="badge">CLEAN</span>
+      <div class="card-image">🎨</div>
+      <h3>Outlined Style</h3>
+      <p>Bordures élégantes avec transparence, idéal pour superposition d'images.</p>
+      <div class="card-footer">
+        <span class="price">35€</span>
+        <button class="btn">Acheter</button>
+      </div>
+    </div>
+
+    <!-- ELEVATED -->
+    <div class="card elevated-card">
+      <span class="badge">PREMIUM</span>
+      <div class="card-image">💎</div>
+      <h3>Elevated Card</h3>
+      <p>Ombres profondes et effet de profondeur pour un look haut de gamme.</p>
+      <div class="card-footer">
+        <span class="price">69€</span>
+        <button class="btn">Acheter</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="footer-note">
+    💡 Tous ces styles sont générés avec CSS Toolbox - Card Maker<br>
+    Personnalisez-les selon vos besoins !
+  </p>
+</body>
+</html>
+

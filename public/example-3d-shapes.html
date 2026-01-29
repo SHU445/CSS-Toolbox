@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exemples de Formes 3D CSS</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a25 100%);
+      color: white;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 60px;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .scene {
+      perspective: 1000px;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(22, 22, 31, 0.5);
+      border-radius: 20px;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scene::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .shape-label {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(59, 130, 246, 0.2);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      backdrop-filter: blur(10px);
+    }
+
+    .shape-3d {
+      transform-style: preserve-3d;
+      animation: rotate-3d 12s linear infinite;
+    }
+
+    @keyframes rotate-3d {
+      from {
+        transform: rotateX(-20deg) rotateY(0deg);
+      }
+      to {
+        transform: rotateX(-20deg) rotateY(360deg);
+      }
+    }
+
+    /* CUBE */
+    .cube {
+      width: 200px;
+      height: 200px;
+      position: relative;
+    }
+
+    .cube .face {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      opacity: 0.9;
+      border: 2px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .cube .front {
+      background: #3b82f6;
+      transform: translateZ(100px);
+    }
+
+    .cube .back {
+      background: #8b5cf6;
+      transform: translateZ(-100px) rotateY(180deg);
+    }
+
+    .cube .right {
+      background: #ec4899;
+      transform: rotateY(90deg) translateZ(100px);
+    }
+
+    .cube .left {
+      background: #10b981;
+      transform: rotateY(-90deg) translateZ(100px);
+    }
+
+    .cube .top {
+      background: #f59e0b;
+      transform: rotateX(90deg) translateZ(100px);
+    }
+
+    .cube .bottom {
+      background: #ef4444;
+      transform: rotateX(-90deg) translateZ(100px);
+    }
+
+    /* PYRAMID */
+    .pyramid {
+      width: 200px;
+      height: 200px;
+      position: relative;
+    }
+
+    .pyramid .base {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: #ef4444;
+      transform: translateY(200px) rotateX(-90deg);
+      opacity: 0.9;
+    }
+
+    .pyramid-face {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      border-bottom: 200px solid;
+      transform-origin: bottom center;
+      opacity: 0.85;
+    }
+
+    .pyramid .face1 {
+      border-bottom-color: #3b82f6;
+      transform: translateX(100px) translateY(200px) rotateX(40deg) translateZ(50px);
+    }
+
+    .pyramid .face2 {
+      border-bottom-color: #ec4899;
+      transform: translateX(100px) translateY(200px) rotateX(40deg) rotateY(90deg) translateZ(50px);
+    }
+
+    .pyramid .face3 {
+      border-bottom-color: #8b5cf6;
+      transform: translateX(100px) translateY(200px) rotateX(40deg) rotateY(180deg) translateZ(50px);
+    }
+
+    .pyramid .face4 {
+      border-bottom-color: #10b981;
+      transform: translateX(100px) translateY(200px) rotateX(40deg) rotateY(270deg) translateZ(50px);
+    }
+
+    /* OCTAHEDRON */
+    .octahedron {
+      width: 180px;
+      height: 180px;
+      position: relative;
+    }
+
+    .octahedron-face {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 90px solid transparent;
+      border-right: 90px solid transparent;
+      transform-origin: bottom center;
+      opacity: 0.85;
+    }
+
+    /* Top pyramid faces */
+    .octahedron .top-face1 {
+      border-bottom: 90px solid #3b82f6;
+      transform: translateX(90px) translateY(90px) rotateX(-55deg) rotateZ(0deg) translateZ(45px);
+    }
+
+    .octahedron .top-face2 {
+      border-bottom: 90px solid #ec4899;
+      transform: translateX(90px) translateY(90px) rotateX(-55deg) rotateZ(90deg) translateZ(45px);
+    }
+
+    .octahedron .top-face3 {
+      border-bottom: 90px solid #8b5cf6;
+      transform: translateX(90px) translateY(90px) rotateX(-55deg) rotateZ(180deg) translateZ(45px);
+    }
+
+    .octahedron .top-face4 {
+      border-bottom: 90px solid #10b981;
+      transform: translateX(90px) translateY(90px) rotateX(-55deg) rotateZ(270deg) translateZ(45px);
+    }
+
+    /* Bottom pyramid faces */
+    .octahedron .bottom-face1 {
+      border-top: 90px solid #f59e0b;
+      transform: translateX(90px) translateY(90px) rotateX(55deg) rotateZ(0deg) translateZ(45px);
+      transform-origin: top center;
+    }
+
+    .octahedron .bottom-face2 {
+      border-top: 90px solid #3b82f6;
+      transform: translateX(90px) translateY(90px) rotateX(55deg) rotateZ(90deg) translateZ(45px);
+      transform-origin: top center;
+    }
+
+    .octahedron .bottom-face3 {
+      border-top: 90px solid #ef4444;
+      transform: translateX(90px) translateY(90px) rotateX(55deg) rotateZ(180deg) translateZ(45px);
+      transform-origin: top center;
+    }
+
+    .octahedron .bottom-face4 {
+      border-top: 90px solid #8b5cf6;
+      transform: translateX(90px) translateY(90px) rotateX(55deg) rotateZ(270deg) translateZ(45px);
+      transform-origin: top center;
+    }
+
+    .note {
+      text-align: center;
+      margin-top: 60px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <h1>🎲 Formes 3D en CSS</h1>
+
+  <div class="gallery">
+    <!-- CUBE -->
+    <div class="scene">
+      <span class="shape-label">CUBE</span>
+      <div class="shape-3d cube">
+        <div class="face front">FRONT</div>
+        <div class="face back">BACK</div>
+        <div class="face right">RIGHT</div>
+        <div class="face left">LEFT</div>
+        <div class="face top">TOP</div>
+        <div class="face bottom">BOTTOM</div>
+      </div>
+    </div>
+
+    <!-- PYRAMID -->
+    <div class="scene">
+      <span class="shape-label">PYRAMIDE</span>
+      <div class="shape-3d pyramid">
+        <div class="base"></div>
+        <div class="pyramid-face face1"></div>
+        <div class="pyramid-face face2"></div>
+        <div class="pyramid-face face3"></div>
+        <div class="pyramid-face face4"></div>
+      </div>
+    </div>
+
+    <!-- OCTAHEDRON -->
+    <div class="scene">
+      <span class="shape-label">OCTAÈDRE</span>
+      <div class="shape-3d octahedron">
+        <!-- Top pyramid -->
+        <div class="octahedron-face top-face1"></div>
+        <div class="octahedron-face top-face2"></div>
+        <div class="octahedron-face top-face3"></div>
+        <div class="octahedron-face top-face4"></div>
+        <!-- Bottom pyramid -->
+        <div class="octahedron-face bottom-face1"></div>
+        <div class="octahedron-face bottom-face2"></div>
+        <div class="octahedron-face bottom-face3"></div>
+        <div class="octahedron-face bottom-face4"></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="note">
+    💡 Ces formes sont créées uniquement avec HTML et CSS, sans images ni SVG.<br>
+    Générez les vôtres avec CSS Toolbox !
+  </p>
+</body>
+</html>
+
